@@ -1,0 +1,110 @@
+@import "../../css/variables.scss";
+@import "../../css/mixins.scss";
+
+.header {
+    margin: 30px;
+    .top-head {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .logo {
+            img {
+                width: 35%;
+            }
+        }
+        ul {
+            list-style-type: none;
+            display: inline-block;
+            li {
+                margin: 0 5px;
+                a {
+                    color: white;
+                    &:hover {
+                        text-decoration: none;
+                        color: rgba(245, 245, 245, 0.658);
+                    }
+                }
+                .active {
+                    color: seagreen;
+                    &:hover {
+                        color: white;
+                    }
+                }
+            }
+        }
+        .profile-photo {
+            margin-top: -10px;
+
+            img {
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                border: 3px solid seagreen;
+            }
+            .btn-holder {
+                opacity: 0;
+                margin-left: -15px;
+                button {
+                    background-color: #ccc;
+                    color: black;
+                }
+            }
+
+            &:hover .btn-holder {
+                opacity: 1;
+                transition: 1s all ease-in-out;
+                -webkit-transition: 1s all ease-in-out;
+                -moz-transition: 1s all ease-in-out;
+                -ms-transition: 1s all ease-in-out;
+                -o-transition: 1s all ease-in-out;
+            }
+        }
+    }
+}
+
+.bottom-head {
+    padding: 10px 0;
+    margin-top: -60px;
+    background: url("../../assets/images/math.png") top no-repeat;
+    height: 250px;
+    h1 {
+        color: yellow;
+        font-size: 100px;
+    }
+    .headings {
+        display: inline-block;
+        text-align: right;
+        position: relative;
+        top: 30px;
+
+        h2 {
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            background-color: $background-color;
+            color: white;
+            width: 90%;
+            padding: 3px;
+            font-family: inherit;
+            font-weight: lighter;
+            opacity: 0.7;
+        }
+        p {
+            @extend h2;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .header .top-head {
+        justify-content: space-around;
+        .right-side {
+            margin-top: 14px;
+        }
+        .profile-photo {
+            margin-left: 5px;
+        }
+    }
+}

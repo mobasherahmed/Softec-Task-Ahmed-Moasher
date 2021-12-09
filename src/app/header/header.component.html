@@ -1,0 +1,40 @@
+<div class="header">
+    <div class="top-head d-flex">
+        <div class="logo">
+            <img src="assets/images/logo_k12.png" alt="logo">
+        </div>
+
+        <div class="right-side">
+            <div class="row">
+                <div class="links">
+                    <ul>
+                        <div class="d-flex">
+                            <li><a id="products" (click)="navigateTo('products')"
+                                    [ngClass]="activeText === 'products'? 'active':''">Products</a></li>
+                            <li class="text-white"> | </li>
+                            <li><a id="orders" (click)="navigateTo('orders')"
+                                    [ngClass]="activeText === 'orders'? 'active':''">Orders</a>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="profile-photo" (click)="navigateTo('profile')" style="cursor: pointer;">
+                    <img src="assets/images/1.jpg" alt="profile">
+                    <div class="btn-holder">
+                        <button (click)="navigateTo('profile')">My Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="bottom-head">
+    <div class="headings">
+        <h2>BUY ONLINE</h2>
+        <p>
+            <span class="ml-5 mr-2"> Buy any product,anytime.Explore thousand of
+                products starting at $11.99 each</span>
+        </p>
+    </div>
+</div>

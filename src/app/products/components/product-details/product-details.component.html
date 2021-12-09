@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="row product-page-main">
+            <div class="col-xl-4">
+                <section>
+                 <img src="" alt="">
+                </section>
+            </div>
+            <div class="col-xl-8">
+                <div class="product-page-details">
+                    <h5>{{product.name}}</h5>
+                    <div class="d-flex">
+                        <span>{{product.review}}</span>
+                    </div>
+                </div>
+                <hr>
+                <p>{{product.discription}}</p>
+                <div class="product-price digits">
+                    <del>{{product.discountPrice | currency}}
+                    </del>{{product.price | currency}}
+                </div>
+                <hr>
+                <div>
+                    <table class="product-page-width">
+                        <tbody>
+                            <tr>
+                                <td><b>Brand : </b>{{product.tags}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Availability: </b>{{product.stock}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <ul class="product-color m-t-15">
+                    <li class="bg-primary"></li>
+                    <li class="bg-secondary"></li>
+                    <li class="bg-success"></li>
+                    <li class="bg-info"></li>
+                    <li class="bg-warning"></li>
+                </ul>
+                <div class="m-t-15">
+                    <button class="btn btn-primary-gradien m-r-10" type="button"
+                        data-original-title="btn btn-info-gradien" [routerLink]="['/products/add-cart']"
+                        (click)="addToCart(product)" title="">
+                        Add To Cart</button>
+                    <button class="btn btn-success-gradien" type="button" data-original-title="btn btn-info-gradien"
+                        (click)="buyNow(product)" title="">Buy Now</button>
+                    <button class="btn btn-primary-gradien m-r-10 m-l-10" type="button"
+                        data-original-title="btn btn-info-gradien" [routerLink]="['/products']" title="">
+                        Back To Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
