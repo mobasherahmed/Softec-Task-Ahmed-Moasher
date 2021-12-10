@@ -9,10 +9,11 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductsListComponent implements OnInit {
   products: any [] = [];
-  ProductName: any;
-  ProductId: any;
+  ProductName: string = '';
+  addedProductIds: any [] = [];
   cartText: string='';
   showAlert: boolean=false;
+  orders: any[]=[];
 
   constructor(private _product:ProductsService) {
   }
@@ -20,39 +21,41 @@ export class ProductsListComponent implements OnInit {
   ngOnInit(): void {
     this._product.getProducts().subscribe(products=>{
       this.products = products;
-      console.log("pp",products);
-      localStorage.setItem('Products', JSON.stringify(products));
-
-      
     })
   }
 
-   //add Product
-   addProduct(Product:any) {
-    // edit avaliable seat .. 
-    this.editProductSeats(Product.ProductId, Product.AvailableSeats - 1)
-    // this.share.assignRequestedProduct(Product)
-    this.ProductName = Product.ProductName
-    this.ProductId.push(Product.ProductId)
-    // this.share.selectedProductsIds = this.ProductId;
-    this.cartText = 'In your cart'
-    this.showAlert = true
+  addOrder(Product:any){
+    this.editProductQuantity(Product);
+    let o:any = localStorage.getItem('orders')
+    console.log("o",o);
+    if(o){
+      this.orders = JSON.parse(o);
+      console.log("orders",this.orders);
+
+    }
+  if(this.orders){
+    this.orders.push(Product)
+    localStorage.setItem('orders',JSON.stringify(this.orders))
+
+  }else{
+    let orders = [];
+    orders.push(Product)
+    localStorage.setItem('orders',JSON.stringify(orders))
+  }
+    this.ProductName = Product.ProductName;
+    this.showAlert = true;
+    this.addedProductIds.push(Product.ProductId);
     setTimeout(() => {
-      this.showAlert = false
-    }, 2000);
+    this.showAlert = false;
+    }, 500);
   }
 
-
-  editProductSeats(ProductId:string, AvaliableSeats:number) {
-    let p:any = localStorage.getItem('Products');
-    let allProducts = JSON.parse(p);
-    allProducts.forEach((el:any) => {
-      if (el.ProductId === ProductId) {
-        el.AvailableSeats = AvaliableSeats
-      }
-    });
-    localStorage.setItem('Products', JSON.stringify(allProducts));
-    this.products = allProducts
+  editProductQuantity(product:any){
+    this._product.updateProductQuantity(product.ProductId,product.Quantity -1)
+    .subscribe(products=>{
+      this.products = products;
+    })
   }
+
 
 }

@@ -11,14 +11,6 @@
         border-top-right-radius: 5px;
     }
     .Products {
-        .search {
-            margin-top: 9px;
-        }
-        .searchIcon {
-            cursor: pointer;
-            font-size: 20px;
-            line-height: 1;
-        }
         .title {
             border-bottom: 5px solid $primary-color;
             margin-bottom: 15px;
@@ -37,37 +29,37 @@
                 font-size: 14px;
             }
 
-            .btn-success {
-                background-color: $color-white;
-                color: $primary-color;
-                font-weight: bold;
-                font-size: 12px;
-                padding: 3px;
-                border-color: $color-white;
-                border-radius: 4px;
-                -webkit-border-radius: 4px;
-                -moz-border-radius: 4px;
-                -ms-border-radius: 4px;
-                -o-border-radius: 4px;
-                &:active,
-                &:focus,
-                &:hover {
-                    box-shadow: none !important;
-                    border-color: $primary-color !important;
-                    background-color: $primary-color !important;
-                    color: $color-white !important;
-                    transition: 1s all ease-in-out;
-                    -webkit-transition: 1s all ease-in-out;
-                    -moz-transition: 1s all ease-in-out;
-                    -ms-transition: 1s all ease-in-out;
-                    -o-transition: 1s all ease-in-out;
-                }
+            // .btn-success {
+            //     background-color: $color-white;
+            //     color: $primary-color;
+            //     font-weight: bold;
+            //     font-size: 12px;
+            //     padding: 3px;
+            //     border-color: $color-white;
+            //     border-radius: 4px;
+            //     -webkit-border-radius: 4px;
+            //     -moz-border-radius: 4px;
+            //     -ms-border-radius: 4px;
+            //     -o-border-radius: 4px;
+            //     &:active,
+            //     &:focus,
+            //     &:hover {
+            //         box-shadow: none !important;
+            //         border-color: $primary-color !important;
+            //         background-color: $primary-color !important;
+            //         color: $color-white !important;
+            //         transition: 1s all ease-in-out;
+            //         -webkit-transition: 1s all ease-in-out;
+            //         -moz-transition: 1s all ease-in-out;
+            //         -ms-transition: 1s all ease-in-out;
+            //         -o-transition: 1s all ease-in-out;
+            //     }
 
-                &:disabled {
-                    background-color: $primary-color;
-                    color: $color-white;
-                }
-            }
+            //     // &:disabled {
+            //     //     background-color: $red;
+            //     //     color: $color-white;
+            //     // }
+            // }
         }
     }
 

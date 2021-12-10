@@ -10,83 +10,55 @@
     </div>
     <div class="row">
       <div class="col-md-3" *ngFor="let Product of products">
-          <div class="product">
-              <div class="img-holder">
-                <img [src]="Product.ProductImg" alt="Product image" />
-              </div>
-              <div class="content text-center">
-                <p>{{ Product.ProductName }}</p>
-                <p>{{ Product.ProductPrice | currency: "USD" }}</p>
-                <button class="btn btn-success">Add to cart</button>
-              </div>
+        <div class="product">
+          <div class="img-holder">
+            <img [src]="Product.ProductImg" alt="Product image" />
           </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="col-sm-12">
-    <div class="card">
-      <div class="card-header">
-        <h5>Add To Cart</h5>
-      </div>
-      <div class="card-body cart">
-        <div class="order-history table-responsive wishlist">
-          <table class="table table-bordernone">
-            <thead>
-              <tr>
-                <th>Prdouct</th>
-                <th>Prdouct Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Action</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="title-orders">
-                <td colspan="12">New Orders</td>
-              </tr>
-              <tr *ngFor="let item of products">
-                <td><img class="img-fluid img-60" [src]="[item.ProductImg]" alt="#"></td>
-                <td>
-                  <div class="product-name"><a
-                      [routerLink]="['/products/product-details', item.ProductId]">{{item.ProductName}}</a></div>
-                </td>
-                <td>{{item.ProductPrice | currency}}</td>
-                <td>
-                  <div class="qty-box">
-
-                    <div class="input-group">
-                        <!-- (click)="decrement(item.product)" -->
-                      <i class="fa fa-minus btnGtr" ></i>
-                      <input class="touchspin1 text-center" name="quantity" type="text" disabled
-                        [value]="item.AvailableSeats">
-                        <!-- (click)="increment(item.product)" -->
-                      <i class="fa fa-plus btnLess"></i>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <!-- <app-feather-icons class="remove" [icon]="'x-circle'" (click)=remove(item)></app-feather-icons> -->
-                </td>
-
-                <td>{{ item.ProductPrice * 2 | currency}}</td>
-              <tr>
-                <td class="total-amount" colspan="5">
-                  <h6 class="m-0"> <span class="f-w-600">Total Price:</span></h6>
-                </td>
-                <td><span>{{ 12323 | currency}} </span></td>
-              </tr>
-              <tr>
-                <td colspan="5"><a class="btn btn-primary cart-btn-transform"
-                    [routerLink]="['/products']">continue shopping</a></td>
-                <td><a class="btn btn-primary cart-btn-transform" [routerLink]="['/products/check-out']">check
-                    out</a></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="content">
+            <p>
+              <a
+                [routerLink]="['/products/product-details', Product.ProductId]"
+                >{{ Product.ProductName }}</a
+              >
+            </p>
+            <div class="d-flex">
+              <p class="col-sm-6 pl-0">
+                Price :
+                <span class="badge badge-success">
+                  {{ Product.ProductPrice | currency: "USD" }}
+                </span>
+              </p>
+              <p class="col-sm-6">
+                Quantity:
+                <span
+                  [ngClass]="
+                    Product.Quantity > 10 ? 'text-primary' : 'text-danger'
+                  "
+                >
+                  {{ Product.Quantity }}
+                </span>
+              </p>
+            </div>
+            <button
+              class="btn btn-primary col-sm-12 p-2"
+              [ngClass]="{'btn-danger':Product.Quantity === 0,
+              'btn-success': addedProductIds.includes(Product.ProductId)}"
+              [disabled]="
+                Product.Quantity === 0 ||
+                addedProductIds.includes(Product.ProductId)
+              "
+              (click)="addOrder(Product)"
+            >
+              <span *ngIf="Product.Quantity != 0">{{
+                addedProductIds.includes(Product.ProductId)
+                  ? "In your cart"
+                  : "Add to cart"
+              }}</span>
+              <span *ngIf="Product.Quantity === 0">Out of stock</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
