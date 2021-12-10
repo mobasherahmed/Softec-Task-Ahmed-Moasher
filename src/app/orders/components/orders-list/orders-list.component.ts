@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/products/services/products.service';
 import { OrdersService } from '../../services/orders.service';
 
 @Component({
@@ -11,25 +10,47 @@ export class OrdersListComponent implements OnInit {
   orders: any [] = [];
 
   constructor(private _orderService:OrdersService) {
-  //  this.orders =  this._orderService.getOrders().value;   
   }
 
   ngOnInit(): void {
    let orders:any = localStorage.getItem('orders')
-   this.orders = JSON.parse(orders) 
-  console.log("oooo",this.orders);
-  
+   if(orders){
+     this.orders = JSON.parse(orders);
+   }
   }
 
-   //product quentity decrement
-  //  public decrement(product: any, quantity: number = -1) {
-  //   this._orderService.updateProductQuantity(product, quantity)
-
-  // }
+  //  product quentity decrement
+   public decrement(id: number) {
+    let p = this.orders.find(p=>p.ProductId === id);
+    if(p.Count > 1){
+      p.Count = p.Count - 1;
+    }
+    localStorage.setItem("orders",JSON.stringify(this.orders))
+  }
 
   //product quentity increment
-  // public increment(product: any, quantity: number = +1) {
-  //   this._orderService.updateProductQuantity(product, quantity)
-  // }
+  public increment(id: number ) {
+    let p = this.orders.find(p=>p.ProductId === id);
+    if(p.Quantity > p.Count){
+      p.Count = p.Count + 1;
+    }
+    localStorage.setItem("orders",JSON.stringify(this.orders))
+    
+  }
+
+  // remove item
+  removeItem(id:number){
+    let p = this.orders.find(p=>p.ProductId === id);
+    let index = this.orders.indexOf(p);
+    this.orders.splice(index,1);
+    localStorage.setItem("orders",JSON.stringify(this.orders))
+
+  }
+
+  getTotal(){
+    return this.orders.reduce((prev, curr) => {
+      return prev + curr.ProductPrice * curr.Count;
+    }, 0);
+  }
   
 }

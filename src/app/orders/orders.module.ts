@@ -5,18 +5,22 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { OrdersRoutingModule } from './orders-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersService } from './services/orders.service';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     OrdersListComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    OrdersRoutingModule
+    OrdersRoutingModule,
+    ReactiveFormsModule
   ],
   providers:[OrdersService]
 })

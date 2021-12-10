@@ -13,7 +13,7 @@ export class ProductsListComponent implements OnInit {
   addedProductIds: any [] = [];
   cartText: string='';
   showAlert: boolean=false;
-  orders: any[]=[];
+ 
 
   constructor(private _product:ProductsService) {
   }
@@ -22,32 +22,45 @@ export class ProductsListComponent implements OnInit {
     this._product.getProducts().subscribe(products=>{
       this.products = products;
     })
+    this.checkPreviousOrders()
+  }
+
+  // to highlight product that already in your cart ..
+  checkPreviousOrders(){
+    let o:any = localStorage.getItem('orders');
+    if(o){
+      let orders:any [] = JSON.parse(o);
+      orders.forEach(o=>{
+        this.addedProductIds.push(o.ProductId) 
+      })
+    }
   }
 
   addOrder(Product:any){
     this.editProductQuantity(Product);
-    let o:any = localStorage.getItem('orders')
-    console.log("o",o);
-    if(o){
-      this.orders = JSON.parse(o);
-      console.log("orders",this.orders);
-
-    }
-  if(this.orders){
-    this.orders.push(Product)
-    localStorage.setItem('orders',JSON.stringify(this.orders))
-
-  }else{
-    let orders = [];
-    orders.push(Product)
-    localStorage.setItem('orders',JSON.stringify(orders))
-  }
+    this.addProductToCart(Product)
     this.ProductName = Product.ProductName;
     this.showAlert = true;
     this.addedProductIds.push(Product.ProductId);
     setTimeout(() => {
     this.showAlert = false;
     }, 500);
+  }
+
+  addProductToCart(Product:any){
+    // add new property to this product that requested count = 1 ..
+    Product.Count = 1;
+    // check if there is an orders list in local storage or not ..
+    let o:any = localStorage.getItem('orders');
+    if(o){
+      let orders = JSON.parse(o);
+      orders.push(Product)
+      localStorage.setItem('orders',JSON.stringify(orders))
+    }else{
+      let orders = [];
+      orders.push(Product)
+      localStorage.setItem('orders',JSON.stringify(orders))
+    }
   }
 
   editProductQuantity(product:any){

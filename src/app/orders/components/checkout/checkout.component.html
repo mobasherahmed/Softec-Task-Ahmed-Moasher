@@ -1,0 +1,134 @@
+<div class="container-fluid">
+    <div class="card checkout">
+      <div class="card-header">
+        <h5>Checkout</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <form [formGroup]="checkoutForm" novalidate>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <div class="field-label">First Name</div>
+                  <input type="text" name="firstname" formControlName="firstname" class="form-control" placeholder=""
+                    [class.border-danger]="red_border">
+                  <div
+                    *ngIf="checkoutForm.controls['firstname'].touched && checkoutForm.controls['firstname'].errors?.required"
+                    class="text text-danger">
+                    First Name is required.
+                  </div>
+                  <div
+                    *ngIf="checkoutForm.controls['firstname'].touched && checkoutForm.controls['firstname'].errors?.pattern"
+                    class="text text-danger">
+                    First Name must be an alphabates.
+                  </div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <div class="field-label">Last Name </div>
+                  <input type="text" name="lastname" formControlName="lastname" class="form-control" placeholder="">
+                  <div
+                    *ngIf="checkoutForm.controls['lastname'].touched && checkoutForm.controls['lastname'].errors?.required"
+                    class="text text-danger">
+                    Last Name is required.
+                  </div>
+                  <div
+                    *ngIf="checkoutForm.controls['lastname'].touched && checkoutForm.controls['lastname'].errors?.pattern"
+                    class="text text-danger">
+                    Last Name must be an alphabates.
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <label for="inputEmail4">Phone</label>
+                  <input class="form-control" type="number" formControlName="phone" class="form-control">
+                  <div *ngIf="checkoutForm.controls['phone'].touched && checkoutForm.controls['phone'].errors?.required"
+                    class="text text-danger">
+                    Phone No is required.
+                  </div>
+                  <div *ngIf="checkoutForm.controls['phone'].touched && checkoutForm.controls['phone'].errors?.pattern"
+                    class="text text-danger">
+                    Phone No is must be number.
+                  </div>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="inputPassword4">Email Address</label>
+                  <input class="form-control" type="email" formControlName="email" class="form-control">
+                  <div *ngIf="checkoutForm.controls['email'].touched && checkoutForm.controls['email'].errors?.required"
+                    class="text text-danger">
+                    Email is required
+                  </div>
+                  <div *ngIf="checkoutForm.controls['email'].touched && checkoutForm.controls['email'].errors?.email"
+                    class="text text-danger">
+                    Invalid Email
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputState">Country</label>
+                <select name="country" formControlName="country" class="form-control">
+                  <option value="" selected>Select Country</option>
+                  <option value="Egypt">Egypt</option>
+                  <option value="USA">USA</option>
+                  <option value="KSA">KSA</option>
+                </select>
+                <div *ngIf="checkoutForm.controls['country'].touched && checkoutForm.controls['country'].errors?.required"
+                  class="text text-danger">
+                  Country is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputAddress2">Address</label>
+                <input class="form-control" type="text" formControlName="address" class="form-control">
+                <div *ngIf="checkoutForm.controls['address'].touched && checkoutForm.controls['address'].errors?.required"
+                  class="text text-danger">
+                  Address is required
+                </div>
+                <div
+                  *ngIf="checkoutForm.controls['address'].touched && checkoutForm.controls['address'].errors?.maxlength"
+                  class="text text-danger">
+                  Maximum 50 character
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <div class="checkout-details">
+              <div class="order-box">
+                <div class="title-box">
+                  <div class="checkbox-title">
+                    <h4>Product </h4><span>Total</span>
+                  </div>
+                </div>
+                <ul class="qty" *ngIf='checkOutItems.length'>
+                  <li *ngFor="let item of checkOutItems"> {{ item.ProductName }} × {{ item.Count }}
+                    <span> {{ item.ProductPrice * item.Count | currency}}</span>
+                  </li>
+                </ul>
+                <ul class="qty" *ngIf='!checkOutItems.length'>
+                  <li class="empty-checkout"> There are no products in cart </li>
+                </ul>
+                <ul class="sub-total">
+                  <li>Subtotal <span
+                      class="count">{{getTotal() |  currency}}</span></li>
+                </ul>
+                <ul class="total">
+                  <li>Total <span
+                      class="count">{{ getTotal() | currency}}</span></li>
+                </ul>
+                <div class="text-right">
+                  <button class="btn btn-primary" type="submit" [disabled]="!checkoutForm.valid"
+                    (click)="onSubmit()">Make Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="text-right mt-3">
+              <button class="btn btn-primary cart-btn-transform" [routerLink]="['/products']">continue
+                shopping</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
