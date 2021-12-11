@@ -1,0 +1,28 @@
+.qty-box{
+    margin: 0 auto;
+    cursor: pointer;
+    .input-group {
+        input{
+         width: 4em;
+        }
+        .btn {
+            background-color: #ddd !important;
+            border-color: #ddd !important;
+            padding: 5px 12px;
+        }
+        .btnGtr,.btnLess {
+            background: #ddd;
+            color: #fff;
+            padding: 10px;
+        }
+    }
+}
+.remove{
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid black;
+    cursor: pointer;
+    display: block;
+    line-height: 2;
+    width: 34px;
+}

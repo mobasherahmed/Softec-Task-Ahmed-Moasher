@@ -19,11 +19,6 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  addToCart(product:any){
-    
-  }
-  buyNow(product:any){
-    
-  }
+
 
 }

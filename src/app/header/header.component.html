@@ -12,6 +12,10 @@
                             <li><a id="products" (click)="navigateTo('products')"
                                     [ngClass]="activeText === 'products'? 'active':''">Products</a></li>
                             <li class="text-white"> | </li>
+                            <li><a id="cart" (click)="navigateTo('cart')"
+                                    [ngClass]="activeText === 'cart'? 'active':''">Cart</a>
+                            </li>
+                            <li class="text-white"> | </li>
                             <li><a id="orders" (click)="navigateTo('orders')"
                                     [ngClass]="activeText === 'orders'? 'active':''">Orders</a>
                             </li>

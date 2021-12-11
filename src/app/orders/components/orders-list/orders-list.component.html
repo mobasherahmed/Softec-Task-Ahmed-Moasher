@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="col-sm-12 empty-cart-cls text-center my-2" *ngIf="!orders.length">
     <img src="assets/images/icon-empty-cart.png" class="img-fluid mb-4">
-    <h3><strong>Your Cart is Empty</strong></h3>
+    <h3><strong>You don't make any orders yet</strong></h3>
     <h4><strong>Add something to make me happy :)</strong></h4>
     <a class="btn btn-primary cart-btn-transform my-2" [routerLink]="['/products']">continue shopping</a>
   </div>
@@ -9,58 +9,36 @@
     <div class="col-sm-12">
         <div class="card">
           <div class="card-header">
-            <h5>Add To Cart</h5>
+            <h5>Orders</h5>
           </div>
           <div class="card-body cart">
-            <div class="order-history table-responsive wishlist">
+            <div class="table-responsive">
               <table class="table table-bordernone">
                 <thead>
                   <tr>
-                    <th>Prdouct</th>
-                    <th>Prdouct Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Actions</th>
+                    <th>OrderID</th>
+                    <th>Creation Date</th>
                     <th>Total</th>
+                    <th>Acrions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="title-orders">
-                    <td colspan="12">New Orders</td>
-                  </tr>
-                  <tr *ngFor="let item of orders">
-                    <td><img class="img-fluid img-60" [src]="[item.ProductImg]" alt="produvrImage"></td>
+                 
+                 <td colspan="12">New Orders</td>
+                   
+                  <tr *ngFor="let order of orders">
+                    <td><span class="badge badge-danger">{{order.GUID}}</span></td>
+                    <td>{{order.creationDate | date:'medium'}}</td>
+                    <td>{{order.totalAmount | currency}}</td>
                     <td>
-                      <div class="product-name"><a
-                          [routerLink]="['/products/product-details', item.ProductId]">{{item.ProductName}}</a></div>
+                      <button class="btn btn-primary" routerLink="/orders/order-details/{{order.GUID}}">
+                        Order Details
+                      </button>
                     </td>
-                    <td>{{item.ProductPrice | currency}}</td>
-                    <td>
-                      <div class="qty-box">
-                        <div class="input-group">
-                          <i class="fa fa-minus btnGtr" (click)="decrement(item.ProductId)"></i>
-                          <input class="touchspin1 text-center" name="quantity" type="text" disabled
-                            [value]="item.Count">
-                          <i class="fa fa-plus btnLess" (click)="increment(item.ProductId)"></i>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <i class="fa fa-remove remove" (click)="removeItem(item.ProductId)"></i>
-                    </td>
-                  
-                    <td>{{ item.ProductPrice * item.Count | currency}}</td>
-                  <tr>
-                    <td class="total-amount" colspan="5">
-                      <h6 class="m-0"> <span class="f-w-600">Total Price:</span></h6>
-                    </td>
-                    <td><span>{{ getTotal() | currency}} </span></td>
                   </tr>
                   <tr>
-                    <td colspan="5"><a class="btn btn-primary cart-btn-transform"
+                    <td colspan="4"><a class="btn btn-primary cart-btn-transform"
                         [routerLink]="['/products']">continue shopping</a></td>
-                    <td><a class="btn btn-primary cart-btn-transform" [routerLink]="['/orders/checkout']">check
-                        out</a></td>
                   </tr>
                 </tbody>
               </table>

@@ -1,15 +1,19 @@
 <div class="container-fluid">
-    <div class="col-sm-12 empty-cart-cls text-center my-2" *ngIf="!order">
+    <div class="col-sm-12 empty-cart-cls text-center my-2" *ngIf="!cartItems.length">
       <img src="assets/images/icon-empty-cart.png" class="img-fluid mb-4">
-      <h3><strong>You don't make any orders yet</strong></h3>
+      <h3><strong>Your Cart is Empty</strong></h3>
       <h4><strong>Add something to make me happy :)</strong></h4>
       <a class="btn btn-primary cart-btn-transform my-2" [routerLink]="['/products']">continue shopping</a>
     </div>
-    <div class="row my-3"  *ngIf="order">
+    <div class="row my-3"  *ngIf="cartItems.length">
+     
       <div class="col-sm-12">
           <div class="card">
+            <div class="alert alert-warning col-sm-12" role="alert" *ngIf="showAlert">
+              You cannot exceed product quantity {{productQuantity}} !!
+            </div>
             <div class="card-header">
-              <h5>Order Details</h5>
+              <h5>Add To Cart</h5>
             </div>
             <div class="card-body cart">
               <div class="table-responsive">
@@ -20,18 +24,15 @@
                       <th>Prdouct Name</th>
                       <th>Price</th>
                       <th>Quantity</th>
+                      <th>Actions</th>
                       <th>Total</th>
                     </tr>
                   </thead>
                   <tbody>
-                   
-                   <td colspan="12">Order created at
-                     <span class="badge badge-success">
-                       {{order.creationDate | date:'medium'}}
-                     </span> 
-                    </td>
-                     
-                    <tr *ngFor="let item of order.products">
+                    <tr class="title-cartItems">
+                      <td colspan="12">New Orders</td>
+                    </tr>
+                    <tr *ngFor="let item of cartItems">
                       <td><img class="img-fluid img-60" [src]="[item.ProductImg]" alt="produvrImage"></td>
                       <td>
                         <div class="product-name"><a
@@ -39,20 +40,31 @@
                       </td>
                       <td>{{item.ProductPrice | currency}}</td>
                       <td>
-                        {{item.Count}}
+                        <div class="qty-box">
+                          <div class="input-group">
+                            <i class="fa fa-minus btnGtr" (click)="decrement(item.ProductId)"></i>
+                            <input class="touchspin1 text-center" name="quantity" type="text" disabled
+                              [value]="item.Count">
+                            <i class="fa fa-plus btnLess" (click)="increment(item.ProductId)"></i>
+                          </div>
+                        </div>
                       </td>
+                      <td>
+                        <i class="fa fa-remove remove" (click)="removeItem(item.ProductId)"></i>
+                      </td>
+                    
                       <td>{{ item.ProductPrice * item.Count | currency}}</td>
-                    </tr>
                     <tr>
-                      <td class="total-amount" colspan="4">
+                      <td class="total-amount" colspan="5">
                         <h6 class="m-0"> <span class="f-w-600">Total Price:</span></h6>
                       </td>
-                      <td><span class="badge badge-success">{{ order.totalAmount | currency}} </span></td>
-                    </tr> 
-  
+                      <td><span>{{ getTotal() | currency}} </span></td>
+                    </tr>
                     <tr>
                       <td colspan="5"><a class="btn btn-primary cart-btn-transform"
                           [routerLink]="['/products']">continue shopping</a></td>
+                      <td><a class="btn btn-primary cart-btn-transform" [routerLink]="['/orders/checkout']">check
+                          out</a></td>
                     </tr>
                   </tbody>
                 </table>

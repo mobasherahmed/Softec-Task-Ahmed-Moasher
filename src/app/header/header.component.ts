@@ -18,8 +18,11 @@ export class HeaderComponent implements OnInit {
     if(route === 'products'){
       this.router.navigate([`products`])
       this.activeText='products'
+    }else if (route === 'cart'){
+      this.router.navigate([`orders/cart`])
+      this.activeText='cart'
     }else if (route === 'orders'){
-      this.router.navigate([`orders`])
+      this.router.navigate([`orders/order-list`])
       this.activeText='orders'
     }else{
       this.router.navigate([`profile`])

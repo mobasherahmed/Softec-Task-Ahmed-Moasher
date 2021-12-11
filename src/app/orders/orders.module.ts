@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrdersService } from './services/orders.service';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CartComponent } from './components/cart/cart.component';
 
 
 
@@ -14,7 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     OrdersListComponent,
     OrderDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,

@@ -27,10 +27,10 @@ export class ProductsListComponent implements OnInit {
 
   // to highlight product that already in your cart ..
   checkPreviousOrders(){
-    let o:any = localStorage.getItem('orders');
+    let o:any = localStorage.getItem('cartItems');
     if(o){
-      let orders:any [] = JSON.parse(o);
-      orders.forEach(o=>{
+      let cartItems:any [] = JSON.parse(o);
+      cartItems.forEach(o=>{
         this.addedProductIds.push(o.ProductId) 
       })
     }
@@ -50,16 +50,16 @@ export class ProductsListComponent implements OnInit {
   addProductToCart(Product:any){
     // add new property to this product that requested count = 1 ..
     Product.Count = 1;
-    // check if there is an orders list in local storage or not ..
-    let o:any = localStorage.getItem('orders');
+    // check if there is an cartItems list in local storage or not ..
+    let o:any = localStorage.getItem('cartItems');
     if(o){
-      let orders = JSON.parse(o);
-      orders.push(Product)
-      localStorage.setItem('orders',JSON.stringify(orders))
+      let cartItems = JSON.parse(o);
+      cartItems.push(Product)
+      localStorage.setItem('cartItems',JSON.stringify(cartItems))
     }else{
-      let orders = [];
-      orders.push(Product)
-      localStorage.setItem('orders',JSON.stringify(orders))
+      let cartItems = [];
+      cartItems.push(Product)
+      localStorage.setItem('cartItems',JSON.stringify(cartItems))
     }
   }
 
