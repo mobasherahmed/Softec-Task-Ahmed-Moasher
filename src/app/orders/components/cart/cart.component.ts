@@ -62,6 +62,10 @@ export class CartComponent implements OnInit {
 
   }
 
+  emptyCartItems(){
+    localStorage.setItem("cartItems",JSON.stringify([]))
+  }
+  
   getTotal(){
    return this._orderService.getTotal(this.cartItems);
   }

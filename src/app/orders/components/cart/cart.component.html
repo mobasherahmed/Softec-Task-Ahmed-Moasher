@@ -63,7 +63,7 @@
                     <tr>
                       <td colspan="5"><a class="btn btn-primary cart-btn-transform"
                           [routerLink]="['/products']">continue shopping</a></td>
-                      <td><a class="btn btn-primary cart-btn-transform" [routerLink]="['/orders/checkout']">check
+                      <td><a class="btn btn-primary cart-btn-transform" (click)="emptyCartItems()" [routerLink]="['/orders/checkout']">check
                           out</a></td>
                     </tr>
                   </tbody>
