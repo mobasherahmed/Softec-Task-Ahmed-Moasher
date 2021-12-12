@@ -39,6 +39,8 @@ export class OrdersService {
       orders.push(item)
       localStorage.setItem('orders',JSON.stringify(orders));
     }
+    // empty cart items after making order ..
+    localStorage.setItem("cartItems",JSON.stringify([]))
     this.router.navigate(['/orders/']);
   }
 
