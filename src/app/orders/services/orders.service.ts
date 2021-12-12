@@ -14,7 +14,7 @@ export class OrdersService {
   getOrders() {
     let orders:any = localStorage.getItem('orders');
     if(orders){
-      return JSON.parse(orders)    
+      return JSON.parse(orders);   
     }else{
       return []
     }
@@ -25,7 +25,6 @@ export class OrdersService {
     if(o){
       let orders = JSON.parse(o);
       let order = orders.find((order:any)=>order.GUID === id)
-      console.log("ooo",order);
       return order;
     }
   }
@@ -42,4 +41,11 @@ export class OrdersService {
     }
     this.router.navigate(['/orders/']);
   }
+
+  getTotal(arr:any){
+    return arr.reduce((prev:any, curr:any) => {
+      return prev + curr.ProductPrice * curr.Count;
+    }, 0);
+  }
+
 }

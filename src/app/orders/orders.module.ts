@@ -8,6 +8,7 @@ import { OrdersService } from './services/orders.service';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
+import { ProductsService } from '../products/services/products.service';
 
 
 
@@ -24,6 +25,6 @@ import { CartComponent } from './components/cart/cart.component';
     OrdersRoutingModule,
     ReactiveFormsModule
   ],
-  providers:[OrdersService]
+  providers:[OrdersService,ProductsService]
 })
 export class OrdersModule { }

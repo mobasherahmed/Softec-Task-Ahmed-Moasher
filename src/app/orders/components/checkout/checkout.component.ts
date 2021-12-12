@@ -48,9 +48,7 @@ export class CheckoutComponent implements OnInit {
       totalAmount : this.getTotal(),
       creationDate:new Date()
     }
-    console.log("itemOrder",item);
-    
-    this._orderService.createOrder(item)
+    this._orderService.createOrder(item);
   }
 
   createGUID() {
@@ -65,9 +63,7 @@ export class CheckoutComponent implements OnInit {
   }
  
    getTotal(){
-    return this.checkOutItems.reduce((prev, curr) => {
-      return prev + curr.ProductPrice * curr.Count;
-    }, 0);
+    return this._orderService.getTotal(this.checkOutItems)
   }
 
 

@@ -7,7 +7,6 @@ import { map, take } from 'rxjs/operators';
 })
 export class ProductsService {
   
-  private orders:any []=[]; 
     
   constructor(private http: HttpClient) {}
 
@@ -15,22 +14,19 @@ export class ProductsService {
     return this.http.get('assets/products.json').pipe(take(1));
   }
 
-  getProduct(id: number): Observable<any> {
-    return this.http.get('assets/products.json').pipe(
-      map((products: any) => {
-        return products.find((product: any) => product.ProductId === id);
-      }),
-      take(1)
-    );
+  getProduct(id: number) {
+    let p:any =  localStorage.getItem('products');
+    let products = JSON.parse(p);
+    let product = products.find((product: any) => product.ProductId === id);
+    return product;
   }
 
-  updateProductQuantity(id: number, quantity: number): Observable<any> {
-    return this.http.get('assets/products.json').pipe(
-        map((products:any)=>{
-          let product = products.find((product: any) => product.ProductId === id);
-          product.Quantity = quantity;
-          return products;
-        })
-      ,take(1));
+  updateProductQuantity(id: number, quantity: number) {
+   let p:any =  localStorage.getItem('products');
+   let products = JSON.parse(p);
+   let product = products.find((product: any) => product.ProductId === id);
+   product.Quantity = quantity;
+   localStorage.setItem('products',JSON.stringify(products));
+   return products;
   }
 }

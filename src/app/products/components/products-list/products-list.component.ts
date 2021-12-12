@@ -19,9 +19,16 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._product.getProducts().subscribe(products=>{
-      this.products = products;
-    })
+    let p:any = localStorage.getItem('products');
+    if(p){
+      this.products = JSON.parse(p);
+    }else{
+      this._product.getProducts()
+      .subscribe(products=>{
+        this.products = products;
+        localStorage.setItem('products',JSON.stringify(products));
+      })
+    }
     this.checkPreviousOrders()
   }
 
@@ -50,6 +57,7 @@ export class ProductsListComponent implements OnInit {
   addProductToCart(Product:any){
     // add new property to this product that requested count = 1 ..
     Product.Count = 1;
+    Product.Quantity = Product.Quantity - 1;
     // check if there is an cartItems list in local storage or not ..
     let o:any = localStorage.getItem('cartItems');
     if(o){
@@ -64,10 +72,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   editProductQuantity(product:any){
-    this._product.updateProductQuantity(product.ProductId,product.Quantity -1)
-    .subscribe(products=>{
-      this.products = products;
-    })
+  this.products =  this._product.updateProductQuantity(product.ProductId,product.Quantity -1)
   }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/products/services/products.service';
 import { OrdersService } from '../../services/orders.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class CartComponent implements OnInit {
   showAlert: boolean= false;
   productQuantity: number=0;
 
-  constructor(private _orderService:OrdersService) {
+  constructor(private _orderService:OrdersService,private _productService:ProductsService) {
   }
 
   ngOnInit(): void {
@@ -27,15 +28,19 @@ export class CartComponent implements OnInit {
     let p = this.cartItems.find(p=>p.ProductId === id);
     if(p.Count > 1){
       p.Count = p.Count - 1;
-      localStorage.setItem("cartItems",JSON.stringify(this.cartItems))
+      p.Quantity = p.Quantity + 1;
+      this._productService.updateProductQuantity(id,p.Quantity);
+      localStorage.setItem("cartItems",JSON.stringify(this.cartItems));
     }
   }
 
   //product quentity increment
   public increment(id: number ) {
     let p = this.cartItems.find(p=>p.ProductId === id);
-    if(p.Quantity > p.Count){
+    if(p.Quantity > 0){
       p.Count = p.Count + 1;
+      p.Quantity = p.Quantity - 1;
+      this._productService.updateProductQuantity(id,p.Quantity);
       localStorage.setItem("cartItems",JSON.stringify(this.cartItems))
     }else{
       this.showAlert = true;
@@ -52,13 +57,12 @@ export class CartComponent implements OnInit {
     let p = this.cartItems.find(p=>p.ProductId === id);
     let index = this.cartItems.indexOf(p);
     this.cartItems.splice(index,1);
+    this._productService.updateProductQuantity(id,p.Quantity+p.Count);
     localStorage.setItem("cartItems",JSON.stringify(this.cartItems))
 
   }
 
   getTotal(){
-    return this.cartItems.reduce((prev, curr) => {
-      return prev + curr.ProductPrice * curr.Count;
-    }, 0);
+   return this._orderService.getTotal(this.cartItems);
   }
 }

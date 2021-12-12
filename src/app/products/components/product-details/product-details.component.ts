@@ -11,9 +11,7 @@ export class ProductDetailsComponent implements OnInit {
   product:any = {}
   constructor(private route:ActivatedRoute,private _productService:ProductsService) {
     this.route.paramMap.subscribe(params=>{
-      this._productService.getProduct(Number(params.get('id'))).subscribe(product=>{
-        this.product = product;
-      })
+      this.product = this._productService.getProduct(Number(params.get('id')))
     })
    }
 
