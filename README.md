@@ -2,21 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
 
-## Project Description :
+# Project Description :
 
-Eccomerce project consists of two modules [Products Module - Orders Module] and a header componenent that holds navbar and project logo ..
+Ecommerce project consists of two modules [Products Module - Orders Module] and a header componenent that holds navbar .
 
-# Header Component 
+## Header Component 
 
-We have 3 main pages [ products - Cart - Orders ]
-each caan access by navbar located in header as below .
+We have 3 main pages [ Products - Cart - Orders ]
+each can access by navbar located in header as below .
+
 ![image](https://user-images.githubusercontent.com/48737204/145725445-323573ca-f818-49aa-ac85-51cb8e6e66a2.png)
 
-# Add To Cart Functionality 
+## Add To Cart Functionality 
 
 In Product list we can see product image , avilable quantity and price and user can access product details page by clicking on product name link .
 After clicking on Add to cart button , product directly added to cart and it's quantity decremented by 1 item .
 If product quantity is 0 user cannot added it to his cart and button text changed to Out of stock as below .
+
 ![image](https://user-images.githubusercontent.com/48737204/145725497-64f1c6a8-1dbb-45a0-a004-9d9057a57f98.png)
 
 ## Cart Page 
@@ -35,7 +37,7 @@ Cart page show products that user add to his cart with the option to remove it f
  
  By default product added to cart with amount 1 and user cannot decrese amount of product less than 1.
  
- # Checkout 
+ ## Checkout 
  
  In Cart page user can checkout by clicking to checkout button shown below table this will take user to checkout page so he can make an order.
  
@@ -45,7 +47,7 @@ Cart page show products that user add to his cart with the option to remove it f
  
  ![image](https://user-images.githubusercontent.com/48737204/145726047-ceb6315b-bc3d-4daf-8a82-29c6b1a21cb7.png)
  
- # Orders List 
+ ## Orders List 
  
  After making an order app will navigated to orders list page that show all orders making by user in the application and Order Details Button that will show order details and products ordered as below 
  
